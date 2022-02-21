@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Metube</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <nav class="navbar p-3">
+    <a href="" class="navbar-brand">
+    <%= fa_icon "youtube-play", class: "text-danger mr-2" %>
+    METUBE
+    </a>
+    <%= form_tag videos_path, method: :get, class: "form-inline d-flex" do %>
+      <%= text_field_tag :q, params[:q], class: "form-control mr-2" %>
+      <%= submit_tag "Search", class: "btn btn-danger ml-2" %>
+    <% end %>
+    <div class="navbar-right">
+      <% if current_user %>
+      <%= link_to "Upload", new_video_path, class: "btn btn-primary"%>
+      <%= link_to "LogOut", destroy_user_session_path, method: :delete, class: "btn btn-danger"%>
+      <% else %>
+      <%= link_to "LogIn", new_user_session_path, class: "btn btn-primary"%>
+      <%= link_to "Register", new_user_registration_path, class: "btn btn-success"%>
+      <% end %>
+    </div>
+  </nav>
+  <body>
+    <div class="container-fluid">
+      <div class="card">
+        <div class="card-body">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

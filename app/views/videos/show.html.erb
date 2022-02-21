@@ -1,0 +1,32 @@
+<%= video_tag @video.file.url, controls: true, class: "w-100" if @video.file?%>
+<p>
+  <strong>Title:</strong>
+  <%= @video.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @video.description %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @video.user_id %>
+</p>
+
+<p>
+  <strong>View count:</strong>
+  <%= @video.view_count.to_i %>
+</p>
+
+<% if current_user && @video.user == current_user %>
+<%= link_to 'Edit', edit_video_path(@video), class: "btn btn-danger" %>
+<%= link_to 'Delete', @video, method: :delete, data: {confirm: "Do you want to delete?"},  class: "btn btn-outline-danger" %>
+<% end %>
+<%= link_to 'Back', videos_path , class: "btn btn-danger" %>
+<br/>
+<br/>
+<div id="comments">
+  <%= render "videos/comments" %>
+</div>
+
